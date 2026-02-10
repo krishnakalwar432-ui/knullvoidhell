@@ -1,0 +1,1037 @@
+export interface Game {
+  id: string;
+  title: string;
+  description: string;
+  category: string;
+  difficulty: 'Easy' | 'Medium' | 'Hard';
+  isImplemented: boolean;
+  mobileOptimized: boolean;
+  thumbnail?: string;
+  color: string;
+}
+
+export const games: Game[] = [
+  // Implemented games
+  {
+    id: 'space-invaders',
+    title: 'Space Invaders Extreme',
+    description: 'Classic arcade action with modern 3D effects',
+    category: 'Arcade',
+    difficulty: 'Medium',
+    isImplemented: true,
+    mobileOptimized: true,
+    color: '#0aff9d'
+  },
+  {
+    id: 'neon-pong',
+    title: 'Neon Pong 3D',
+    description: 'Retro pong with neon visuals and 3D physics',
+    category: 'Sports',
+    difficulty: 'Easy',
+    isImplemented: true,
+    mobileOptimized: true,
+    color: '#7000ff'
+  },
+  {
+    id: 'memory-matrix',
+    title: 'Memory Card Matrix',
+    description: 'Test your memory with cyber-themed cards',
+    category: 'Puzzle',
+    difficulty: 'Medium',
+    isImplemented: true,
+    mobileOptimized: true,
+    color: '#ff0099'
+  },
+  {
+    id: 'infinite-runner',
+    title: 'Infinite Runner',
+    description: 'Endless cosmic adventure through space',
+    category: 'Action',
+    difficulty: 'Medium',
+    isImplemented: true,
+    mobileOptimized: true,
+    color: '#00ffff'
+  },
+  {
+    id: 'black-hole-puzzle',
+    title: 'Black Hole Puzzle',
+    description: 'Navigate through gravitational fields',
+    category: 'Puzzle',
+    difficulty: 'Hard',
+    isImplemented: true,
+    mobileOptimized: true,
+    color: '#ffa500'
+  },
+  {
+    id: 'cyber-slash',
+    title: 'Cyber Slash',
+    description: 'Fruit Ninja in cyberspace',
+    category: 'Action',
+    difficulty: 'Medium',
+    isImplemented: true,
+    mobileOptimized: true,
+    color: '#0aff9d'
+  },
+  {
+    id: 'gravity-dodge',
+    title: 'Gravity Dodge',
+    description: 'Avoid obstacles in zero gravity',
+    category: 'Action',
+    difficulty: 'Hard',
+    isImplemented: true,
+    mobileOptimized: true,
+    color: '#7000ff'
+  },
+  {
+    id: 'crypto-miner',
+    title: 'Crypto Miner Sim',
+    description: 'Build your virtual mining empire',
+    category: 'Simulation',
+    difficulty: 'Medium',
+    isImplemented: true,
+    mobileOptimized: true,
+    color: '#ff0099'
+  },
+  {
+    id: 'laser-deflector',
+    title: 'Laser Deflector',
+    description: 'Redirect laser beams to solve puzzles',
+    category: 'Puzzle',
+    difficulty: 'Hard',
+    isImplemented: true,
+    mobileOptimized: true,
+    color: '#00ffff'
+  },
+  {
+    id: 'ai-dungeon',
+    title: 'AI Dungeon',
+    description: 'Text-based RPG with AI storytelling',
+    category: 'RPG',
+    difficulty: 'Medium',
+    isImplemented: true,
+    mobileOptimized: true,
+    color: '#ffa500'
+  },
+  {
+    id: 'quantum-tetris',
+    title: 'Quantum Tetris',
+    description: 'Tetris with quantum physics mechanics',
+    category: 'Puzzle',
+    difficulty: 'Hard',
+    isImplemented: true,
+    mobileOptimized: true,
+    color: '#0aff9d'
+  },
+  {
+    id: 'glitch-painter',
+    title: 'Glitch Painter',
+    description: 'Create digital art with glitch effects',
+    category: 'Creative',
+    difficulty: 'Easy',
+    isImplemented: true,
+    mobileOptimized: true,
+    color: '#7000ff'
+  },
+  {
+    id: 'orbital-chess',
+    title: 'Orbital Chess',
+    description: 'Chess in zero gravity with orbital mechanics',
+    category: 'Strategy',
+    difficulty: 'Hard',
+    isImplemented: true,
+    mobileOptimized: true,
+    color: '#ff0099'
+  },
+  {
+    id: 'nano-racing',
+    title: 'Nano Racing',
+    description: 'High-speed molecular racing game',
+    category: 'Racing',
+    difficulty: 'Medium',
+    isImplemented: true,
+    mobileOptimized: true,
+    color: '#00ffff'
+  },
+  {
+    id: 'beat-sync-rhythm',
+    title: 'Beat Sync Rhythm',
+    description: 'Musical rhythm game with neon beats',
+    category: 'Music',
+    difficulty: 'Medium',
+    isImplemented: true,
+    mobileOptimized: true,
+    color: '#ffa500'
+  },
+  {
+    id: 'pixel-zombies',
+    title: 'Pixel Zombies',
+    description: 'Retro zombie survival with pixel art',
+    category: 'Action',
+    difficulty: 'Hard',
+    isImplemented: true,
+    mobileOptimized: true,
+    color: '#0aff9d'
+  },
+  {
+    id: 'data-breach-hacker',
+    title: 'Data Breach Hacker Sim',
+    description: 'Hack systems and break through firewalls',
+    category: 'Simulation',
+    difficulty: 'Hard',
+    isImplemented: true,
+    mobileOptimized: true,
+    color: '#7000ff'
+  },
+  {
+    id: 'plasma-snake',
+    title: 'Plasma Snake',
+    description: 'Classic snake with plasma energy effects',
+    category: 'Arcade',
+    difficulty: 'Easy',
+    isImplemented: true,
+    mobileOptimized: true,
+    color: '#ff0099'
+  },
+  {
+    id: 'void-jumper',
+    title: 'Void Jumper',
+    description: 'Platform jumping through cosmic voids',
+    category: 'Platform',
+    difficulty: 'Medium',
+    isImplemented: true,
+    mobileOptimized: true,
+    color: '#00ffff'
+  },
+  {
+    id: 'cyber-blackjack',
+    title: 'Cyber Blackjack',
+    description: 'Futuristic blackjack with AI opponents',
+    category: 'Card',
+    difficulty: 'Easy',
+    isImplemented: true,
+    mobileOptimized: true,
+    color: '#ffa500'
+  },
+  {
+    id: 'astro-archer',
+    title: 'Astro Archer',
+    description: 'Bow and arrow in zero gravity',
+    category: 'Action',
+    difficulty: 'Medium',
+    isImplemented: true,
+    mobileOptimized: true,
+    color: '#0aff9d'
+  },
+  {
+    id: 'code-breaker',
+    title: 'Code Breaker',
+    description: 'Decrypt alien communication codes',
+    category: 'Puzzle',
+    difficulty: 'Hard',
+    isImplemented: true,
+    mobileOptimized: true,
+    color: '#7000ff'
+  },
+  {
+    id: 'drone-delivery',
+    title: 'Drone Delivery',
+    description: 'Navigate drones through cyber cityscape',
+    category: 'Simulation',
+    difficulty: 'Medium',
+    isImplemented: true,
+    mobileOptimized: true,
+    color: '#ff0099'
+  },
+  {
+    id: 'neural-network-puzzle',
+    title: 'Neural Network Puzzle',
+    description: 'Connect neural pathways to solve puzzles',
+    category: 'Puzzle',
+    difficulty: 'Hard',
+    isImplemented: true,
+    mobileOptimized: true,
+    color: '#00ffff'
+  },
+  {
+    id: 'singularity-clicker',
+    title: 'Singularity Clicker',
+    description: 'Incremental clicker game with cosmic progression',
+    category: 'Idle',
+    difficulty: 'Easy',
+    isImplemented: true,
+    mobileOptimized: true,
+    color: '#ffa500'
+  },
+  {
+    id: 'retro-racer',
+    title: 'Retro Racer',
+    description: 'Neon-styled retro racing with synthwave music',
+    category: 'Racing',
+    difficulty: 'Medium',
+    isImplemented: true,
+    mobileOptimized: true,
+    color: '#0aff9d'
+  },
+  {
+    id: 'holo-maze-escape',
+    title: 'Holo Maze Escape',
+    description: 'Navigate through holographic mazes',
+    category: 'Puzzle',
+    difficulty: 'Medium',
+    isImplemented: true,
+    mobileOptimized: true,
+    color: '#7000ff'
+  },
+  {
+    id: 'time-warp-shooter',
+    title: 'Time Warp Shooter',
+    description: 'Bullet-time shooting with temporal mechanics',
+    category: 'Action',
+    difficulty: 'Hard',
+    isImplemented: true,
+    mobileOptimized: true,
+    color: '#ff0099'
+  },
+  {
+    id: 'circuit-breaker',
+    title: 'Circuit Breaker',
+    description: 'Electrical puzzle game with logic circuits',
+    category: 'Puzzle',
+    difficulty: 'Hard',
+    isImplemented: true,
+    mobileOptimized: true,
+    color: '#00ffff'
+  },
+  {
+    id: 'virtual-pet-simulator',
+    title: 'Virtual Pet Simulator',
+    description: 'Raise and care for digital creatures',
+    category: 'Simulation',
+    difficulty: 'Easy',
+    isImplemented: true,
+    mobileOptimized: true,
+    color: '#ffa500'
+  },
+  {
+    id: 'quantum-leap-platformer',
+    title: 'Quantum Leap Platformer',
+    description: 'Platform game with quantum teleportation',
+    category: 'Platform',
+    difficulty: 'Medium',
+    isImplemented: true,
+    mobileOptimized: true,
+    color: '#0aff9d'
+  },
+  {
+    id: 'pixel-art-creator',
+    title: 'Pixel Art Creator',
+    description: 'Create and animate pixel art masterpieces',
+    category: 'Creative',
+    difficulty: 'Easy',
+    isImplemented: true,
+    mobileOptimized: true,
+    color: '#7000ff'
+  },
+  {
+    id: 'space-colony-builder',
+    title: 'Space Colony Builder',
+    description: 'Build and manage space colonies',
+    category: 'Strategy',
+    difficulty: 'Hard',
+    isImplemented: true,
+    mobileOptimized: true,
+    color: '#ff0099'
+  },
+  {
+    id: 'ai-combat-arena',
+    title: 'AI Combat Arena',
+    description: 'Program AI fighters for battle',
+    category: 'Strategy',
+    difficulty: 'Hard',
+    isImplemented: true,
+    mobileOptimized: true,
+    color: '#00ffff'
+  },
+  {
+    id: 'cybernetic-farm',
+    title: 'Cybernetic Farm',
+    description: 'Manage automated farming systems',
+    category: 'Simulation',
+    difficulty: 'Medium',
+    isImplemented: true,
+    mobileOptimized: true,
+    color: '#ffa500'
+  },
+  {
+    id: 'stealth-hacker',
+    title: 'Stealth Hacker',
+    description: 'Infiltrate systems without detection',
+    category: 'Stealth',
+    difficulty: 'Hard',
+    isImplemented: true,
+    mobileOptimized: true,
+    color: '#0aff9d'
+  },
+  {
+    id: 'gravity-flip-adventure',
+    title: 'Gravity Flip Adventure',
+    description: 'Adventure game with gravity manipulation',
+    category: 'Adventure',
+    difficulty: 'Medium',
+    isImplemented: true,
+    mobileOptimized: true,
+    color: '#7000ff'
+  },
+  {
+    id: 'neon-battle-royale',
+    title: 'Neon Battle Royale',
+    description: 'Fast-paced battle royale with neon effects',
+    category: 'Action',
+    difficulty: 'Hard',
+    isImplemented: true,
+    mobileOptimized: true,
+    color: '#ff0099'
+  },
+  {
+    id: 'data-stream-runner',
+    title: 'Data Stream Runner',
+    description: 'Navigate through flowing data streams',
+    category: 'Action',
+    difficulty: 'Medium',
+    isImplemented: true,
+    mobileOptimized: true,
+    color: '#00ffff'
+  },
+  {
+    id: 'augmented-reality-quest',
+    title: 'Augmented Reality Quest',
+    description: 'AR-style adventure with virtual overlays',
+    category: 'Adventure',
+    difficulty: 'Medium',
+    isImplemented: true,
+    mobileOptimized: true,
+    color: '#ffa500'
+  },
+  {
+    id: 'biohazard-survival',
+    title: 'Biohazard Survival',
+    description: 'Survive in contaminated environments',
+    category: 'Survival',
+    difficulty: 'Hard',
+    isImplemented: true,
+    mobileOptimized: true,
+    color: '#0aff9d'
+  },
+  {
+    id: 'code-quest-rpg',
+    title: 'Code Quest RPG',
+    description: 'RPG where you solve coding challenges',
+    category: 'RPG',
+    difficulty: 'Hard',
+    isImplemented: true,
+    mobileOptimized: true,
+    color: '#7000ff'
+  },
+  {
+    id: 'galactic-trader',
+    title: 'Galactic Trader',
+    description: 'Trade resources across star systems',
+    category: 'Strategy',
+    difficulty: 'Medium',
+    isImplemented: true,
+    mobileOptimized: true,
+    color: '#ff0099'
+  },
+  {
+    id: 'rhythm-racer',
+    title: 'Rhythm Racer',
+    description: 'Racing game synchronized to music beats',
+    category: 'Racing',
+    difficulty: 'Medium',
+    isImplemented: true,
+    mobileOptimized: true,
+    color: '#00ffff'
+  },
+  {
+    id: 'memory-maze-challenge',
+    title: 'Memory Maze Challenge',
+    description: 'Navigate mazes using memory patterns',
+    category: 'Puzzle',
+    difficulty: 'Medium',
+    isImplemented: true,
+    mobileOptimized: true,
+    color: '#ffa500'
+  },
+  {
+    id: 'cyberpunk-detective',
+    title: 'Cyberpunk Detective',
+    description: 'Solve mysteries in cyber noir setting',
+    category: 'Adventure',
+    difficulty: 'Hard',
+    isImplemented: true,
+    mobileOptimized: true,
+    color: '#0aff9d'
+  },
+  {
+    id: 'light-speed-puzzle',
+    title: 'Light Speed Puzzle',
+    description: 'Physics puzzles with light manipulation',
+    category: 'Puzzle',
+    difficulty: 'Hard',
+    isImplemented: true,
+    mobileOptimized: true,
+    color: '#7000ff'
+  },
+  {
+    id: 'virtual-reality-explorer',
+    title: 'Virtual Reality Explorer',
+    description: 'Explore virtual worlds and dimensions',
+    category: 'Adventure',
+    difficulty: 'Medium',
+    isImplemented: true,
+    mobileOptimized: true,
+    color: '#ff0099'
+  },
+  {
+    id: 'digital-dungeon-crawler',
+    title: 'Digital Dungeon Crawler',
+    description: 'Classic dungeon crawling in digital space',
+    category: 'RPG',
+    difficulty: 'Hard',
+    isImplemented: true,
+    mobileOptimized: true,
+    color: '#00ffff'
+  },
+  {
+    id: 'synthwave-shooter',
+    title: 'Synthwave Shooter',
+    description: 'Retro-futuristic shooting with synthwave soundtrack',
+    category: 'Action',
+    difficulty: 'Medium',
+    isImplemented: true,
+    mobileOptimized: true,
+    color: '#ffa500'
+  },
+  // New suggested games
+  {
+    id: 'galaga-special-edition',
+    title: 'Galaga: Special Edition',
+    description: 'Classic arcade action with modern enhancements',
+    category: 'Arcade',
+    difficulty: 'Medium',
+    isImplemented: true,
+    mobileOptimized: true,
+    color: '#0aff9d'
+  },
+  {
+    id: 'geometry-wars-retro',
+    title: 'Geometry Wars: Retro Evolved',
+    description: 'Geometric shapes in explosive combat',
+    category: 'Action',
+    difficulty: 'Hard',
+    isImplemented: true,
+    mobileOptimized: true,
+    color: '#7000ff'
+  },
+  {
+    id: 'super-star-shooter',
+    title: 'Super Star Shooter',
+    description: 'Epic space combat with power-ups',
+    category: 'Action',
+    difficulty: 'Medium',
+    isImplemented: true,
+    mobileOptimized: true,
+    color: '#ff0099'
+  },
+  {
+    id: 'vector-wars',
+    title: 'Vector Wars',
+    description: 'Classic vector graphics combat',
+    category: 'Action',
+    difficulty: 'Medium',
+    isImplemented: true,
+    mobileOptimized: true,
+    color: '#00ffff'
+  },
+  {
+    id: 'asteroids-reloaded',
+    title: 'Asteroids Reloaded',
+    description: 'Enhanced asteroid destruction game',
+    category: 'Arcade',
+    difficulty: 'Medium',
+    isImplemented: true,
+    mobileOptimized: true,
+    color: '#ffa500'
+  },
+  {
+    id: 'paddle-wars-3d',
+    title: 'Paddle Wars 3D',
+    description: 'Pong evolved with 3D mechanics',
+    category: 'Sports',
+    difficulty: 'Medium',
+    isImplemented: true,
+    mobileOptimized: true,
+    color: '#0aff9d'
+  },
+  {
+    id: 'blipzkrieg',
+    title: 'Blipzkrieg',
+    description: 'Fast-paced arcade blip warfare',
+    category: 'Arcade',
+    difficulty: 'Hard',
+    isImplemented: true,
+    mobileOptimized: true,
+    color: '#7000ff'
+  },
+  {
+    id: 'curveball-3d',
+    title: 'Curveball 3D',
+    description: '3D pong with curve mechanics',
+    category: 'Sports',
+    difficulty: 'Medium',
+    isImplemented: true,
+    mobileOptimized: true,
+    color: '#ff0099'
+  },
+  {
+    id: 'dx-ball-3-web',
+    title: 'DX-Ball 3 (Web Version)',
+    description: 'Classic breakout with modern features',
+    category: 'Arcade',
+    difficulty: 'Medium',
+    isImplemented: true,
+    mobileOptimized: true,
+    color: '#00ffff'
+  },
+  {
+    id: 'photon-pong',
+    title: 'Photon Pong',
+    description: 'Pong with photon physics',
+    category: 'Sports',
+    difficulty: 'Easy',
+    isImplemented: true,
+    mobileOptimized: true,
+    color: '#ffa500'
+  },
+  {
+    id: 'run-3-webgl',
+    title: 'Run 3 (WebGL)',
+    description: '3D endless running through space tunnels',
+    category: 'Platform',
+    difficulty: 'Medium',
+    isImplemented: true,
+    mobileOptimized: true,
+    color: '#0aff9d'
+  },
+  {
+    id: 'vector-rush',
+    title: 'Vector Rush',
+    description: 'High-speed vector racing',
+    category: 'Racing',
+    difficulty: 'Hard',
+    isImplemented: true,
+    mobileOptimized: true,
+    color: '#7000ff'
+  },
+  {
+    id: 'sonic-dash-clone',
+    title: 'Sonic Dash Clone (HTML5)',
+    description: 'Fast-paced endless running',
+    category: 'Platform',
+    difficulty: 'Medium',
+    isImplemented: true,
+    mobileOptimized: true,
+    color: '#ff0099'
+  },
+  {
+    id: 'cyber-drive',
+    title: 'Cyber Drive',
+    description: 'Futuristic driving through cyber cities',
+    category: 'Racing',
+    difficulty: 'Medium',
+    isImplemented: true,
+    mobileOptimized: true,
+    color: '#00ffff'
+  },
+  {
+    id: 'jumpgrid',
+    title: 'Jumpgrid',
+    description: 'Precision jumping on musical grids',
+    category: 'Music',
+    difficulty: 'Hard',
+    isImplemented: true,
+    mobileOptimized: true,
+    color: '#ffa500'
+  },
+  // Additional 35 games to reach 100 total
+  {
+    id: 'void-blaster-x',
+    title: 'Void Blaster X',
+    description: 'Intense space combat with void weapons',
+    category: 'Action',
+    difficulty: 'Hard',
+    isImplemented: true,
+    mobileOptimized: true,
+    color: '#ff0099'
+  },
+  {
+    id: 'skyfire-assault',
+    title: 'Skyfire Assault',
+    description: 'Aerial combat with explosive action',
+    category: 'Action',
+    difficulty: 'Medium',
+    isImplemented: true,
+    mobileOptimized: true,
+    color: '#ff6600'
+  },
+  {
+    id: 'chromagun-arena',
+    title: 'Chromagun Arena',
+    description: 'Color-based shooting arena battles',
+    category: 'Action',
+    difficulty: 'Medium',
+    isImplemented: true,
+    mobileOptimized: true,
+    color: '#7000ff'
+  },
+  {
+    id: 'neon-sniper-city',
+    title: 'Neon Sniper City',
+    description: 'Precision sniping in cyber city',
+    category: 'Action',
+    difficulty: 'Hard',
+    isImplemented: true,
+    mobileOptimized: true,
+    color: '#0aff9d'
+  },
+  {
+    id: 'blade-rush-3d',
+    title: 'Blade Rush 3D',
+    description: '3D melee combat with lightning speed',
+    category: 'Action',
+    difficulty: 'Medium',
+    isImplemented: true,
+    mobileOptimized: true,
+    color: '#ff0099'
+  },
+  {
+    id: 'gravitron-vortex',
+    title: 'Gravitron Vortex',
+    description: 'Gravity manipulation puzzle action',
+    category: 'Puzzle',
+    difficulty: 'Hard',
+    isImplemented: true,
+    mobileOptimized: true,
+    color: '#7000ff'
+  },
+  {
+    id: 'hyper-ninja-dash',
+    title: 'Hyper Ninja Dash',
+    description: 'Super-fast ninja platforming action',
+    category: 'Platform',
+    difficulty: 'Hard',
+    isImplemented: true,
+    mobileOptimized: true,
+    color: '#ff6600'
+  },
+  {
+    id: 'dead-zone-escape',
+    title: 'Dead Zone Escape',
+    description: 'Survive and escape the contaminated zone',
+    category: 'Survival',
+    difficulty: 'Hard',
+    isImplemented: true,
+    mobileOptimized: true,
+    color: '#0aff9d'
+  },
+  {
+    id: 'stealth-ops-zero-hour',
+    title: 'Stealth Ops: Zero Hour',
+    description: 'Tactical stealth infiltration missions',
+    category: 'Stealth',
+    difficulty: 'Hard',
+    isImplemented: true,
+    mobileOptimized: true,
+    color: '#ff0099'
+  },
+  {
+    id: 'pixel-clash-royale',
+    title: 'Pixel Clash Royale',
+    description: 'Retro pixel art battle royale',
+    category: 'Action',
+    difficulty: 'Medium',
+    isImplemented: true,
+    mobileOptimized: true,
+    color: '#7000ff'
+  },
+  {
+    id: 'night-raid-protocol',
+    title: 'Night Raid Protocol',
+    description: 'Nighttime tactical combat operations',
+    category: 'Action',
+    difficulty: 'Hard',
+    isImplemented: true,
+    mobileOptimized: true,
+    color: '#ff6600'
+  },
+  {
+    id: 'toxic-tunnel-runner',
+    title: 'Toxic Tunnel Runner',
+    description: 'Endless running through toxic tunnels',
+    category: 'Platform',
+    difficulty: 'Medium',
+    isImplemented: true,
+    mobileOptimized: true,
+    color: '#0aff9d'
+  },
+  {
+    id: 'dark-sector-showdown',
+    title: 'Dark Sector Showdown',
+    description: 'Arena combat in dark space sectors',
+    category: 'Action',
+    difficulty: 'Hard',
+    isImplemented: true,
+    mobileOptimized: true,
+    color: '#ff0099'
+  },
+  {
+    id: 'laser-arena-chaos',
+    title: 'Laser Arena Chaos',
+    description: 'Chaotic laser battles in neon arenas',
+    category: 'Action',
+    difficulty: 'Medium',
+    isImplemented: true,
+    mobileOptimized: true,
+    color: '#7000ff'
+  },
+  {
+    id: 'wired-blade-speed-kill',
+    title: 'Wired Blade: Speed Kill',
+    description: 'Ultra-fast cyberpunk sword combat',
+    category: 'Action',
+    difficulty: 'Hard',
+    isImplemented: true,
+    mobileOptimized: true,
+    color: '#ff6600'
+  },
+  {
+    id: 'reactor-overdrive',
+    title: 'Reactor Overdrive',
+    description: 'Manage nuclear reactors under pressure',
+    category: 'Simulation',
+    difficulty: 'Hard',
+    isImplemented: true,
+    mobileOptimized: true,
+    color: '#0aff9d'
+  },
+  {
+    id: 'quantum-gunfight',
+    title: 'Quantum Gunfight',
+    description: 'Gunfights with quantum mechanics',
+    category: 'Action',
+    difficulty: 'Hard',
+    isImplemented: true,
+    mobileOptimized: true,
+    color: '#ff0099'
+  },
+  {
+    id: 'corebreaker-dx',
+    title: 'Corebreaker DX',
+    description: 'Break through digital cores',
+    category: 'Puzzle',
+    difficulty: 'Medium',
+    isImplemented: true,
+    mobileOptimized: true,
+    color: '#7000ff'
+  },
+  {
+    id: 'turbo-katana',
+    title: 'Turbo Katana',
+    description: 'High-speed katana slashing action',
+    category: 'Action',
+    difficulty: 'Medium',
+    isImplemented: true,
+    mobileOptimized: true,
+    color: '#ff6600'
+  },
+  {
+    id: 'battle-shockwave',
+    title: 'Battle Shockwave',
+    description: 'Explosive shockwave combat arena',
+    category: 'Action',
+    difficulty: 'Hard',
+    isImplemented: true,
+    mobileOptimized: true,
+    color: '#0aff9d'
+  },
+  {
+    id: 'inverted-gravity-wars',
+    title: 'Inverted Gravity Wars',
+    description: 'Combat with inverted gravity mechanics',
+    category: 'Action',
+    difficulty: 'Hard',
+    isImplemented: true,
+    mobileOptimized: true,
+    color: '#ff0099'
+  },
+  {
+    id: 'jetpack-annihilator',
+    title: 'Jetpack Annihilator',
+    description: 'Jetpack-powered destruction spree',
+    category: 'Action',
+    difficulty: 'Medium',
+    isImplemented: true,
+    mobileOptimized: true,
+    color: '#7000ff'
+  },
+  {
+    id: 'chrono-ninja',
+    title: 'Chrono Ninja',
+    description: 'Time-manipulating ninja adventures',
+    category: 'Platform',
+    difficulty: 'Hard',
+    isImplemented: true,
+    mobileOptimized: true,
+    color: '#ff6600'
+  },
+  {
+    id: 'nano-bots-rampage',
+    title: 'Nano Bots Rampage',
+    description: 'Control swarms of nano bots',
+    category: 'Strategy',
+    difficulty: 'Medium',
+    isImplemented: true,
+    mobileOptimized: true,
+    color: '#0aff9d'
+  },
+  {
+    id: 'afterburn-reloaded',
+    title: 'Afterburn Reloaded',
+    description: 'Enhanced racing with afterburner boost',
+    category: 'Racing',
+    difficulty: 'Medium',
+    isImplemented: true,
+    mobileOptimized: true,
+    color: '#ff0099'
+  },
+  {
+    id: 'glitch-run-cyber-escape',
+    title: 'Glitch Run: Cyber Escape',
+    description: 'Escape through glitched cyberspace',
+    category: 'Platform',
+    difficulty: 'Medium',
+    isImplemented: true,
+    mobileOptimized: true,
+    color: '#7000ff'
+  },
+  {
+    id: 'holo-strike-duel',
+    title: 'Holo-Strike Duel',
+    description: 'Holographic weapon dueling arena',
+    category: 'Action',
+    difficulty: 'Hard',
+    isImplemented: true,
+    mobileOptimized: true,
+    color: '#ff6600'
+  },
+  {
+    id: 'code-phantom-ops',
+    title: 'Code Phantom Ops',
+    description: 'Phantom operations in digital space',
+    category: 'Stealth',
+    difficulty: 'Hard',
+    isImplemented: true,
+    mobileOptimized: true,
+    color: '#0aff9d'
+  },
+  {
+    id: 'shatterpoint-assault',
+    title: 'Shatterpoint Assault',
+    description: 'Break through dimensional barriers',
+    category: 'Action',
+    difficulty: 'Hard',
+    isImplemented: true,
+    mobileOptimized: true,
+    color: '#ff0099'
+  },
+  {
+    id: 'hexblade-trials',
+    title: 'Hexblade Trials',
+    description: 'Hexagonal blade combat trials',
+    category: 'Action',
+    difficulty: 'Medium',
+    isImplemented: true,
+    mobileOptimized: true,
+    color: '#7000ff'
+  },
+  {
+    id: 'synth-ninja-reflex',
+    title: 'Synth Ninja Reflex',
+    description: 'Synthwave ninja reflex challenges',
+    category: 'Platform',
+    difficulty: 'Hard',
+    isImplemented: true,
+    mobileOptimized: true,
+    color: '#ff6600'
+  },
+  {
+    id: 'neurostrike-combat',
+    title: 'NeuroStrike Combat',
+    description: 'Neural interface combat system',
+    category: 'Action',
+    difficulty: 'Hard',
+    isImplemented: true,
+    mobileOptimized: true,
+    color: '#0aff9d'
+  },
+  {
+    id: 'crimson-blade-rush',
+    title: 'Crimson Blade Rush',
+    description: 'Fast-paced crimson blade battles',
+    category: 'Action',
+    difficulty: 'Medium',
+    isImplemented: true,
+    mobileOptimized: true,
+    color: '#ff0099'
+  },
+  {
+    id: 'zero-signal-showdown',
+    title: 'Zero Signal Showdown',
+    description: 'Combat in signal-dead zones',
+    category: 'Action',
+    difficulty: 'Hard',
+    isImplemented: true,
+    mobileOptimized: true,
+    color: '#7000ff'
+  },
+  {
+    id: 'shadow-arena-brawl',
+    title: 'Shadow Arena Brawl',
+    description: 'Shadow-powered arena brawling',
+    category: 'Action',
+    difficulty: 'Medium',
+    isImplemented: true,
+    mobileOptimized: true,
+    color: '#ff6600'
+  }
+];
+
+export const gameCategories = [
+  'All',
+  'Arcade',
+  'Action',
+  'Puzzle',
+  'Sports',
+  'RPG',
+  'Simulation',
+  'Strategy',
+  'Racing',
+  'Platform',
+  'Creative',
+  'Music',
+  'Card',
+  'Idle',
+  'Stealth',
+  'Adventure',
+  'Survival'
+];
