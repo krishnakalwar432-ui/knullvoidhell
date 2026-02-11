@@ -1,4 +1,5 @@
 import "./global.css";
+import { useState } from "react";
 
 import { Toaster } from "@/components/ui/toaster";
 import { createRoot } from "react-dom/client";
@@ -9,6 +10,10 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import ErrorBoundary from "@/components/ErrorBoundary";
 import { AuthProvider } from "@/context/AuthContext";
 import { LeaderboardProvider } from "@/context/LeaderboardContext";
+import { ThemeProvider } from "@/themes/ThemeProvider";
+import LoadingScreen from "@/components/LoadingScreen";
+import CursorTrail from "@/components/enhancements/CursorTrail";
+import ScreenOverlay from "@/components/enhancements/ScreenOverlay";
 
 // Core pages
 import Index from "./pages/Index";
@@ -106,115 +111,124 @@ import FirewallRunner from "./pages/games/FirewallRunner";
 
 const queryClient = new QueryClient();
 
-const App = () => (
-  <QueryClientProvider client={queryClient}>
-    <TooltipProvider>
-      <Toaster />
-      <Sonner />
-      <AuthProvider>
-      <LeaderboardProvider>
-      <a href="#main" className="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 bg-black text-white px-3 py-2 rounded">Skip to content</a>
-      <BrowserRouter>
-        <ErrorBoundary>
-        <Routes>
-          <Route path="/" element={<Index />} />
-          <Route path="/3d" element={<Interactive3DLanding />} />
-          <Route path="/coming-soon" element={<ComingSoon />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
-          <Route path="/profile" element={<Profile />} />
-          <Route path="/leaderboards" element={<Leaderboards />} />
-          <Route path="/news" element={<News />} />
-          
-          {/* Keep existing working games */}
-          <Route path="/game/space-invaders" element={<SpaceInvaders />} />
-          <Route path="/game/neon-pong" element={<NeonPong />} />
-          <Route path="/game/infinite-runner" element={<InfiniteRunner />} />
-          <Route path="/game/black-hole-puzzle" element={<BlackHolePuzzle />} />
-          <Route path="/game/cyber-slash" element={<CyberSlash />} />
-          <Route path="/game/gravity-dodge" element={<GravityDodge />} />
-          <Route path="/game/crypto-miner" element={<CryptoMiner />} />
-          <Route path="/game/ai-dungeon" element={<AIDungeon />} />
-          <Route path="/game/quantum-tetris" element={<QuantumTetris />} />
-          <Route path="/game/plasma-snake" element={<PlasmaSnake />} />
-          <Route path="/game/singularity-clicker" element={<SingularityClicker />} />
-          <Route path="/game/glitch-painter" element={<GlitchPainter />} />
-          <Route path="/game/pixel-zombies" element={<PixelZombies />} />
-          <Route path="/game/beat-sync-rhythm" element={<BeatSyncRhythm />} />
+const App = () => {
+  const [showLoading, setShowLoading] = useState(true);
 
-          {/* New games - Runners */}
-          <Route path="/game/run3-webgl" element={<Run3WebGL />} />
-          <Route path="/game/slope" element={<Slope />} />
-          <Route path="/game/g-switch-3" element={<GSwitch3 />} />
-          <Route path="/game/ovo" element={<Ovo />} />
-          <Route path="/game/tomb-runner" element={<TombRunner />} />
+  return (
+    <QueryClientProvider client={queryClient}>
+      <TooltipProvider>
+        <Toaster />
+        <Sonner />
+        <ThemeProvider>
+          {showLoading && <LoadingScreen onComplete={() => setShowLoading(false)} />}
+          <CursorTrail />
+          <ScreenOverlay />
+          <AuthProvider>
+            <LeaderboardProvider>
+              <a href="#main" className="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 bg-black text-white px-3 py-2 rounded">Skip to content</a>
+              <BrowserRouter>
+                <ErrorBoundary>
+                  <Routes>
+                    <Route path="/" element={<Index />} />
+                    <Route path="/3d" element={<Interactive3DLanding />} />
+                    <Route path="/coming-soon" element={<ComingSoon />} />
+                    <Route path="/login" element={<Login />} />
+                    <Route path="/register" element={<Register />} />
+                    <Route path="/profile" element={<Profile />} />
+                    <Route path="/leaderboards" element={<Leaderboards />} />
+                    <Route path="/news" element={<News />} />
 
-          {/* New games - Shooters */}
-          <Route path="/game/galaga-special-edition" element={<GalagaSpecialEdition />} />
-          <Route path="/game/nova-defender" element={<NovaDefender />} />
-          <Route path="/game/space-blaze-2" element={<SpaceBlaze2 />} />
-          <Route path="/game/galaxy-warriors" element={<GalaxyWarriors />} />
-          <Route path="/game/alien-sky-invasion" element={<AlienSkyInvasion />} />
-          <Route path="/game/sniper-clash-3d" element={<SniperClash3D />} />
-          <Route path="/game/mini-royale-2" element={<MiniRoyale2 />} />
-          <Route path="/game/combat-reloaded" element={<CombatReloaded />} />
+                    {/* Keep existing working games */}
+                    <Route path="/game/space-invaders" element={<SpaceInvaders />} />
+                    <Route path="/game/neon-pong" element={<NeonPong />} />
+                    <Route path="/game/infinite-runner" element={<InfiniteRunner />} />
+                    <Route path="/game/black-hole-puzzle" element={<BlackHolePuzzle />} />
+                    <Route path="/game/cyber-slash" element={<CyberSlash />} />
+                    <Route path="/game/gravity-dodge" element={<GravityDodge />} />
+                    <Route path="/game/crypto-miner" element={<CryptoMiner />} />
+                    <Route path="/game/ai-dungeon" element={<AIDungeon />} />
+                    <Route path="/game/quantum-tetris" element={<QuantumTetris />} />
+                    <Route path="/game/plasma-snake" element={<PlasmaSnake />} />
+                    <Route path="/game/singularity-clicker" element={<SingularityClicker />} />
+                    <Route path="/game/glitch-painter" element={<GlitchPainter />} />
+                    <Route path="/game/pixel-zombies" element={<PixelZombies />} />
+                    <Route path="/game/beat-sync-rhythm" element={<BeatSyncRhythm />} />
 
-          {/* New games - Classic */}
-          <Route path="/game/snake-3310" element={<Snake3310 />} />
-          <Route path="/game/bounce-classic-html5" element={<BounceClassicHTML5 />} />
-          <Route path="/game/space-impact-reborn" element={<SpaceImpactReborn />} />
-          <Route path="/game/rapid-roll" element={<RapidRoll />} />
+                    {/* New games - Runners */}
+                    <Route path="/game/run3-webgl" element={<Run3WebGL />} />
+                    <Route path="/game/slope" element={<Slope />} />
+                    <Route path="/game/g-switch-3" element={<GSwitch3 />} />
+                    <Route path="/game/ovo" element={<Ovo />} />
+                    <Route path="/game/tomb-runner" element={<TombRunner />} />
 
-          {/* New games - Tower Defense */}
-          <Route path="/game/kingdom-rush" element={<KingdomRush />} />
-          <Route path="/game/bloons-td5" element={<BloonsTD5 />} />
-          <Route path="/game/cursed-treasure" element={<CursedTreasure />} />
-          <Route path="/game/zombie-defense-html5" element={<ZombieDefenseHTML5 />} />
-          <Route path="/game/empire-defender-td" element={<EmpireDefenderTD />} />
-          <Route path="/game/plants-vs-goblins" element={<PlantsVsGoblins />} />
-          <Route path="/game/defend-the-castle" element={<DefendTheCastle />} />
-          <Route path="/game/protect-the-garden" element={<ProtectTheGarden />} />
-          <Route path="/game/swamp-attack-web" element={<SwampAttackWeb />} />
-          <Route path="/game/tiny-defense-2" element={<TinyDefense2 />} />
+                    {/* New games - Shooters */}
+                    <Route path="/game/galaga-special-edition" element={<GalagaSpecialEdition />} />
+                    <Route path="/game/nova-defender" element={<NovaDefender />} />
+                    <Route path="/game/space-blaze-2" element={<SpaceBlaze2 />} />
+                    <Route path="/game/galaxy-warriors" element={<GalaxyWarriors />} />
+                    <Route path="/game/alien-sky-invasion" element={<AlienSkyInvasion />} />
+                    <Route path="/game/sniper-clash-3d" element={<SniperClash3D />} />
+                    <Route path="/game/mini-royale-2" element={<MiniRoyale2 />} />
+                    <Route path="/game/combat-reloaded" element={<CombatReloaded />} />
 
-          {/* New replacements */}
-          <Route path="/game/neon-drift-overdrive" element={<NeonDriftOverdrive />} />
-          <Route path="/game/shadow-bot-protocol" element={<ShadowBotProtocol />} />
-          <Route path="/game/cyber-strike-arena" element={<CyberStrikeArena />} />
-          <Route path="/game/pixel-forge-tycoon" element={<PixelForgeTycoon />} />
-          <Route path="/game/astral-leap" element={<AstralLeap />} />
-          <Route path="/game/firewall-runner" element={<FirewallRunner />} />
+                    {/* New games - Classic */}
+                    <Route path="/game/snake-3310" element={<Snake3310 />} />
+                    <Route path="/game/bounce-classic-html5" element={<BounceClassicHTML5 />} />
+                    <Route path="/game/space-impact-reborn" element={<SpaceImpactReborn />} />
+                    <Route path="/game/rapid-roll" element={<RapidRoll />} />
 
-          {/* Additional 57 Games - Starting with Racing */}
-          <Route path="/game/neon-parkour" element={<NeonParkour />} />
-          <Route path="/game/cyber-quest" element={<CyberQuest />} />
-          <Route path="/game/neon-blocks" element={<NeonBlocks />} />
-          <Route path="/game/quantum-leap" element={<QuantumLeap />} />
-          <Route path="/game/quantum-maze" element={<QuantumMaze />} />
-          <Route path="/game/asteroid-blaster" element={<AsteroidBlaster />} />
-          <Route path="/game/plasma-pong" element={<PlasmaPong />} />
-          <Route path="/game/neon-frogger" element={<NeonFrogger />} />
-          <Route path="/game/quantum-centipede" element={<QuantumCentipede />} />
-          <Route path="/game/cyber-brawler" element={<CyberBrawler />} />
-          <Route path="/game/shadow-ninja" element={<ShadowNinja />} />
-          <Route path="/game/plasma-warrior" element={<PlasmaWarrior />} />
-          <Route path="/game/laser-commando" element={<LaserCommando />} />
-          <Route path="/game/mech-assault" element={<MechAssault />} />
-          <Route path="/game/circuit-solver" element={<CircuitSolver />} />
-          <Route path="/game/crystal-cascade" element={<CrystalCascade />} />
-          <Route path="/game/gravity-shift" element={<GravityShift />} />
-          <Route path="/game/cyber-jumper" element={<CyberJumper />} />
-          <Route path="/game/neon-pacman" element={<NeonPacman />} />
-          <Route path="/game/neon-clicker" element={<NeonClicker />} />
+                    {/* New games - Tower Defense */}
+                    <Route path="/game/kingdom-rush" element={<KingdomRush />} />
+                    <Route path="/game/bloons-td5" element={<BloonsTD5 />} />
+                    <Route path="/game/cursed-treasure" element={<CursedTreasure />} />
+                    <Route path="/game/zombie-defense-html5" element={<ZombieDefenseHTML5 />} />
+                    <Route path="/game/empire-defender-td" element={<EmpireDefenderTD />} />
+                    <Route path="/game/plants-vs-goblins" element={<PlantsVsGoblins />} />
+                    <Route path="/game/defend-the-castle" element={<DefendTheCastle />} />
+                    <Route path="/game/protect-the-garden" element={<ProtectTheGarden />} />
+                    <Route path="/game/swamp-attack-web" element={<SwampAttackWeb />} />
+                    <Route path="/game/tiny-defense-2" element={<TinyDefense2 />} />
 
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-        </ErrorBoundary>
-      </BrowserRouter>
-      </LeaderboardProvider>
-      </AuthProvider>
-    </TooltipProvider>
-  </QueryClientProvider>
-);
+                    {/* New replacements */}
+                    <Route path="/game/neon-drift-overdrive" element={<NeonDriftOverdrive />} />
+                    <Route path="/game/shadow-bot-protocol" element={<ShadowBotProtocol />} />
+                    <Route path="/game/cyber-strike-arena" element={<CyberStrikeArena />} />
+                    <Route path="/game/pixel-forge-tycoon" element={<PixelForgeTycoon />} />
+                    <Route path="/game/astral-leap" element={<AstralLeap />} />
+                    <Route path="/game/firewall-runner" element={<FirewallRunner />} />
+
+                    {/* Additional 57 Games - Starting with Racing */}
+                    <Route path="/game/neon-parkour" element={<NeonParkour />} />
+                    <Route path="/game/cyber-quest" element={<CyberQuest />} />
+                    <Route path="/game/neon-blocks" element={<NeonBlocks />} />
+                    <Route path="/game/quantum-leap" element={<QuantumLeap />} />
+                    <Route path="/game/quantum-maze" element={<QuantumMaze />} />
+                    <Route path="/game/asteroid-blaster" element={<AsteroidBlaster />} />
+                    <Route path="/game/plasma-pong" element={<PlasmaPong />} />
+                    <Route path="/game/neon-frogger" element={<NeonFrogger />} />
+                    <Route path="/game/quantum-centipede" element={<QuantumCentipede />} />
+                    <Route path="/game/cyber-brawler" element={<CyberBrawler />} />
+                    <Route path="/game/shadow-ninja" element={<ShadowNinja />} />
+                    <Route path="/game/plasma-warrior" element={<PlasmaWarrior />} />
+                    <Route path="/game/laser-commando" element={<LaserCommando />} />
+                    <Route path="/game/mech-assault" element={<MechAssault />} />
+                    <Route path="/game/circuit-solver" element={<CircuitSolver />} />
+                    <Route path="/game/crystal-cascade" element={<CrystalCascade />} />
+                    <Route path="/game/gravity-shift" element={<GravityShift />} />
+                    <Route path="/game/cyber-jumper" element={<CyberJumper />} />
+                    <Route path="/game/neon-pacman" element={<NeonPacman />} />
+                    <Route path="/game/neon-clicker" element={<NeonClicker />} />
+
+                    <Route path="*" element={<NotFound />} />
+                  </Routes>
+                </ErrorBoundary>
+              </BrowserRouter>
+            </LeaderboardProvider>
+          </AuthProvider>
+        </ThemeProvider>
+      </TooltipProvider>
+    </QueryClientProvider>
+  );
+};
 
 createRoot(document.getElementById("root")!).render(<App />);

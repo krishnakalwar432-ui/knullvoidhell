@@ -54,8 +54,8 @@ interface SmokeParticle extends Position {
 
 const ShadowNinja: React.FC = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const gameLoopRef = useRef<createSafeAnimationManager | null>(null);
-  const keyHandlerRef = useRef<createSafeKeyManager | null>(null);
+  const gameLoopRef = useRef<ReturnType<typeof createSafeAnimationManager> | null>(null);
+  const keyHandlerRef = useRef<ReturnType<typeof createSafeKeyManager> | null>(null);
 
   const [gameState, setGameState] = useState<'menu' | 'playing' | 'gameOver' | 'levelComplete'>('menu');
   const [score, setScore] = useState(0);

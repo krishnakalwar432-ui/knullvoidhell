@@ -330,10 +330,10 @@ const CyberBrawler: React.FC = () => {
       // Attack effect
       if (fighter.isAttacking) {
         ctx.fillStyle = 'rgba(255, 0, 64, 0.5)';
-        const attackRange = fighter.facing === 'right' ? 
-          [fighter.x + FIGHTER_SIZE/2, fighter.y - FIGHTER_SIZE/2, 30, 20] :
-          [fighter.x - FIGHTER_SIZE/2 - 30, fighter.y - FIGHTER_SIZE/2, 30, 20];
-        ctx.fillRect(...attackRange);
+        const attackRange = fighter.facing === 'right'
+          ? [fighter.x + FIGHTER_SIZE/2, fighter.y - FIGHTER_SIZE/2, 30, 20]
+          : [fighter.x - FIGHTER_SIZE/2 - 30, fighter.y - FIGHTER_SIZE/2, 30, 20];
+        ctx.fillRect(attackRange[0], attackRange[1], attackRange[2], attackRange[3]);
       }
       
       // Block effect

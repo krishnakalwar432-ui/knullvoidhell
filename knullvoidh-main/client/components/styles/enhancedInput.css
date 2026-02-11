@@ -1,0 +1,208 @@
+/* ═══════════════════════════════════════════════════════════
+   ENHANCED INPUT STYLES — Modern Form Inputs
+   ═══════════════════════════════════════════════════════════ */
+
+/* ── Enhanced Input Base ── */
+.enhanced-input {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border-radius: 0.5rem;
+  background-color: rgba(17, 24, 39, 0.4);
+  border: 2px solid rgba(6, 182, 212, 0.3);
+  color: white;
+  font-size: 1rem;
+  font-family: inherit;
+  transition: all 0.3s ease-out;
+  outline: none;
+  -webkit-appearance: none;
+  appearance: none;
+  caret-color: #06b6d4;
+}
+
+.enhanced-input::placeholder {
+  color: rgba(107, 114, 128, 0.7);
+}
+
+/* ── Focus State ── */
+.enhanced-input:focus {
+  background-color: rgba(17, 24, 39, 0.6);
+  border-color: #06b6d4;
+  box-shadow: 0 0 20px rgba(6, 182, 212, 0.2), inset 0 0 10px rgba(6, 182, 212, 0.1);
+}
+
+/* ── Error State ── */
+.enhanced-input-error {
+  border-color: rgba(239, 68, 68, 0.5);
+  background-color: rgba(127, 29, 29, 0.1);
+}
+
+.enhanced-input-error:focus {
+  border-color: #ef4444;
+  box-shadow: 0 0 20px rgba(239, 68, 68, 0.2), inset 0 0 10px rgba(239, 68, 68, 0.1);
+}
+
+/* ── Success State ── */
+.enhanced-input-success {
+  border-color: rgba(34, 197, 94, 0.5);
+  background-color: rgba(6, 78, 29, 0.1);
+}
+
+.enhanced-input-success:focus {
+  border-color: #22c55e;
+  box-shadow: 0 0 20px rgba(34, 197, 94, 0.2), inset 0 0 10px rgba(34, 197, 94, 0.1);
+}
+
+/* ── Disabled State ── */
+.enhanced-input:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  background-color: rgba(17, 24, 39, 0.2);
+  border-color: rgba(107, 114, 128, 0.2);
+}
+
+/* ── Label ── */
+.enhanced-input-label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: rgba(209, 213, 219, 0.8);
+  transition: color 0.3s ease-out;
+}
+
+/* ── Container ── */
+.enhanced-input-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+/* ── With Icon ── */
+.enhanced-input-with-icon {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.enhanced-input-icon {
+  position: absolute;
+  left: 0.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(6, 182, 212, 0.6);
+  pointer-events: none;
+  transition: color 0.3s ease-out;
+}
+
+.enhanced-input-with-icon .enhanced-input {
+  padding-left: 2.75rem;
+}
+
+.enhanced-input-with-icon .enhanced-input:focus ~ .enhanced-input-icon,
+.enhanced-input-with-icon .enhanced-input:focus-within ~ .enhanced-input-icon {
+  color: #06b6d4;
+}
+
+/* ── Text Visibility Toggle (for password inputs) ── */
+.enhanced-input-toggle-btn {
+  position: absolute;
+  right: 0.75rem;
+  background: none;
+  border: none;
+  color: rgba(107, 114, 128, 0.6);
+  cursor: pointer;
+  padding: 0.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.3s ease-out;
+  z-index: 10;
+}
+
+.enhanced-input-toggle-btn:hover {
+  color: rgba(6, 182, 212, 0.8);
+}
+
+.enhanced-input-with-toggle .enhanced-input {
+  padding-right: 2.75rem;
+}
+
+/* ── Error Message ── */
+.enhanced-input-error-message {
+  font-size: 0.875rem;
+  color: rgba(239, 68, 68, 0.9);
+  font-weight: 500;
+  margin-top: 0.25rem;
+}
+
+/* ── Success Icon ── */
+.enhanced-input-success-icon {
+  position: absolute;
+  right: 0.75rem;
+  color: rgba(34, 197, 94, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: enhanced-input-pop-in 0.3s ease-out;
+}
+
+@keyframes enhanced-input-pop-in {
+  0% {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* ── Focus Ring ── */
+.enhanced-input:focus-visible {
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+}
+
+/* ── Autofill Styles ── */
+.enhanced-input:-webkit-autofill,
+.enhanced-input:-webkit-autofill:hover,
+.enhanced-input:-webkit-autofill:focus {
+  -webkit-box-shadow: 0 0 0 1000px rgba(17, 24, 39, 0.4) inset !important;
+  -webkit-text-fill-color: white !important;
+  caret-color: #06b6d4 !important;
+}
+
+/* ── Transition Animations ── */
+.enhanced-input-animate-in {
+  animation: enhanced-input-slide-in 0.3s ease-out;
+}
+
+@keyframes enhanced-input-slide-in {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ── Reduced Motion ── */
+@media (prefers-reduced-motion: reduce) {
+  .enhanced-input,
+  .enhanced-input-error-message,
+  .enhanced-input-success-icon {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+/* ── Responsive ── */
+@media (max-width: 640px) {
+  .enhanced-input {
+    font-size: 16px; /* Prevents zoom on iOS */
+  }
+}

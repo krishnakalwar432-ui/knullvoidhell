@@ -1,4 +1,13 @@
 import React, { createContext, useContext, useEffect, useMemo, useState } from 'react';
+import {
+  onAuthStateChanged,
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  signOut,
+  updateProfile as firebaseUpdateProfile,
+  type User as FirebaseUser,
+} from 'firebase/auth';
+import { auth, signInWithGoogle, resetPassword as firebaseResetPassword } from '@/lib/firebase';
 
 export type Achievement = { id: string; name: string; desc: string; icon?: string };
 export type Badge = { id: string; name: string; color: string };
@@ -18,70 +27,117 @@ export type User = {
 
 type AuthContextValue = {
   user: User | null;
+  loading: boolean;
   register: (data: { username: string; email: string; password: string; region: string }) => Promise<void>;
   login: (identifier: string, password: string) => Promise<void>;
-  logout: () => void;
+  loginWithGoogle: () => Promise<void>;
+  logout: () => Promise<void>;
+  resetPassword: (email: string) => Promise<void>;
   updateProfile: (changes: Partial<User>) => void;
   addFriend: (friendId: string) => void;
 };
 
 const AuthContext = createContext<AuthContextValue | undefined>(undefined);
 
-const USERS_KEY = 'kv_users';
-const CURRENT_USER_KEY = 'kv_user';
+// localStorage keys for extended profile data (achievements, badges, stats, friends)
+const PROFILE_KEY_PREFIX = 'kv_profile_';
 
-const readUsers = (): Record<string, User & { password: string }> => {
-  try { return JSON.parse(localStorage.getItem(USERS_KEY) || '{}'); } catch { return {}; }
+const readProfile = (uid: string): Omit<User, 'id' | 'username' | 'email'> => {
+  try {
+    const raw = localStorage.getItem(PROFILE_KEY_PREFIX + uid);
+    if (raw) return JSON.parse(raw);
+  } catch { }
+  return { region: 'Global', achievements: [], badges: [], stats: {}, friends: [] };
 };
-const writeUsers = (u: Record<string, User & { password: string }>) => localStorage.setItem(USERS_KEY, JSON.stringify(u));
+
+const writeProfile = (uid: string, data: Omit<User, 'id' | 'username' | 'email'>) => {
+  localStorage.setItem(PROFILE_KEY_PREFIX + uid, JSON.stringify(data));
+};
+
+const firebaseUserToUser = (fbUser: FirebaseUser): User => {
+  const profile = readProfile(fbUser.uid);
+  return {
+    id: fbUser.uid,
+    username: fbUser.displayName || fbUser.email?.split('@')[0] || 'Player',
+    email: fbUser.email || '',
+    region: profile.region || 'Global',
+    avatarUrl: fbUser.photoURL || undefined,
+    achievements: profile.achievements || [],
+    badges: profile.badges || [],
+    stats: profile.stats || {},
+    friends: profile.friends || [],
+  };
+};
 
 export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [user, setUser] = useState<User | null>(null);
+  const [loading, setLoading] = useState(true);
 
+  // Listen to Firebase auth state changes
   useEffect(() => {
-    try {
-      const raw = localStorage.getItem(CURRENT_USER_KEY);
-      if (raw) setUser(JSON.parse(raw));
-    } catch {}
+    const unsubscribe = onAuthStateChanged(auth, (fbUser) => {
+      if (fbUser) {
+        setUser(firebaseUserToUser(fbUser));
+      } else {
+        setUser(null);
+      }
+      setLoading(false);
+    });
+    return unsubscribe;
   }, []);
 
-  useEffect(() => {
-    if (user) localStorage.setItem(CURRENT_USER_KEY, JSON.stringify(user));
-    else localStorage.removeItem(CURRENT_USER_KEY);
-  }, [user]);
-
   const register: AuthContextValue['register'] = async ({ username, email, password, region }) => {
-    const users = readUsers();
-    const id = crypto.randomUUID();
-    const exists = Object.values(users).some(u => u.email === email || u.username === username);
-    if (exists) throw new Error('User already exists');
-    const newUser: User & { password: string } = {
-      id, username, email, region, password,
-      avatarUrl: undefined, achievements: [], badges: [], stats: {}, friends: []
-    };
-    users[id] = newUser; writeUsers(users);
-    const { password: _pw, ...publicUser } = newUser;
-    setUser(publicUser as User);
+    const credential = await createUserWithEmailAndPassword(auth, email, password);
+    // Set display name
+    await firebaseUpdateProfile(credential.user, { displayName: username });
+    // Save extended profile
+    writeProfile(credential.user.uid, {
+      region,
+      achievements: [],
+      badges: [],
+      stats: {},
+      friends: [],
+    });
+    setUser(firebaseUserToUser(credential.user));
   };
 
   const login: AuthContextValue['login'] = async (identifier, password) => {
-    const users = readUsers();
-    const entry = Object.values(users).find(u => (u.email === identifier || u.username === identifier) && u.password === password);
-    if (!entry) throw new Error('Invalid credentials');
-    const { password: _pw, ...publicUser } = entry;
-    setUser(publicUser as User);
+    // Firebase only supports email login, so identifier must be email
+    await signInWithEmailAndPassword(auth, identifier, password);
+    // State is updated via onAuthStateChanged
   };
 
-  const logout = () => setUser(null);
+  const loginWithGoogle: AuthContextValue['loginWithGoogle'] = async () => {
+    const result = await signInWithGoogle();
+    // Initialize profile if new Google user
+    const existing = localStorage.getItem(PROFILE_KEY_PREFIX + result.user.uid);
+    if (!existing) {
+      writeProfile(result.user.uid, {
+        region: 'Global',
+        achievements: [],
+        badges: [],
+        stats: {},
+        friends: [],
+      });
+    }
+    // State is updated via onAuthStateChanged
+  };
+
+  const logout: AuthContextValue['logout'] = async () => {
+    await signOut(auth);
+    setUser(null);
+  };
+
+  const resetPasswordFn: AuthContextValue['resetPassword'] = async (email: string) => {
+    await firebaseResetPassword(email);
+  };
 
   const updateProfile: AuthContextValue['updateProfile'] = (changes) => {
     setUser(prev => {
       if (!prev) return prev;
-      const updated = { ...prev, ...changes, stats: { ...prev.stats, ...(changes.stats||{}) } };
-      const users = readUsers();
-      const old = users[prev.id];
-      users[prev.id] = { ...(old||({} as any)), ...updated, password: old?.password || '' };
-      writeUsers(users);
+      const updated = { ...prev, ...changes, stats: { ...prev.stats, ...(changes.stats || {}) } };
+      const { id: _id, username: _u, email: _e, ...profileData } = updated;
+      writeProfile(prev.id, profileData);
       return updated;
     });
   };
@@ -91,15 +147,16 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       if (!prev) return prev;
       if (prev.friends.includes(friendId)) return prev;
       const updated = { ...prev, friends: [...prev.friends, friendId] };
-      const users = readUsers();
-      const me = users[prev.id];
-      users[prev.id] = { ...me, friends: updated.friends };
-      writeUsers(users);
+      const { id: _id, username: _u, email: _e, ...profileData } = updated;
+      writeProfile(prev.id, profileData);
       return updated;
     });
   };
 
-  const value = useMemo(() => ({ user, register, login, logout, updateProfile, addFriend }), [user]);
+  const value = useMemo(
+    () => ({ user, loading, register, login, loginWithGoogle, logout, resetPassword: resetPasswordFn, updateProfile, addFriend }),
+    [user, loading]
+  );
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };

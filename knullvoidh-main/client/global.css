@@ -1,97 +1,60 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Audiowide&family=Teko:wght@400;600;700&family=Rajdhani:wght@400;600;700&family=Saira:wght@400;600;700&display=swap');
+@import './components/buttons/styles/buttonBase.css';
+@import './components/buttons/styles/buttonThemes.css';
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @layer base {
-  /**
-   * Tailwind CSS theme
-   * tailwind.config.ts expects the following color variables to be expressed as HSL values.
-   * A different format will require also updating the theme in tailwind.config.ts.
-  */
   :root {
     --background: 200 30% 8%;
     --foreground: 190 20% 95%;
-
     --card: 200 25% 12%;
     --card-foreground: 190 20% 95%;
-
     --popover: 200 25% 12%;
     --popover-foreground: 190 20% 95%;
-
     --primary: 180 100% 50%;
     --primary-foreground: 200 30% 8%;
-
     --secondary: 210 100% 60%;
     --secondary-foreground: 190 20% 95%;
-
     --muted: 240 5% 15%;
     --muted-foreground: 240 5% 65%;
-
     --accent: 158 100% 51.8%;
     --accent-foreground: 240 10% 3.9%;
-
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 98%;
-
     --border: 240 5% 15%;
     --input: 240 5% 15%;
     --ring: 158 100% 51.8%;
-
     --radius: 0.5rem;
-
     --sidebar-background: 0 0% 98%;
-
     --sidebar-foreground: 240 5.3% 26.1%;
-
     --sidebar-primary: 240 5.9% 10%;
-
     --sidebar-primary-foreground: 0 0% 98%;
-
     --sidebar-accent: 240 4.8% 95.9%;
-
     --sidebar-accent-foreground: 240 5.9% 10%;
-
     --sidebar-border: 220 13% 91%;
-
     --sidebar-ring: 217.2 91.2% 59.8%;
-  }
 
-  .dark {
-    --background: 200 40% 4%;
-    --foreground: 190 25% 98%;
-
-    --card: 200 35% 8%;
-    --card-foreground: 190 25% 98%;
-
-    --popover: 200 35% 8%;
-    --popover-foreground: 190 25% 98%;
-
-    --primary: 180 100% 55%;
-    --primary-foreground: 200 40% 4%;
-
-    --secondary: 210 100% 65%;
-    --secondary-foreground: 190 25% 98%;
-
-    --muted: 240 5% 10%;
-    --muted-foreground: 240 5% 65%;
-
-    --accent: 158 100% 51.8%;
-    --accent-foreground: 240 10% 1.9%;
-
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 0 0% 98%;
-
-    --border: 240 5% 10%;
-    --input: 240 5% 10%;
-    --ring: 158 100% 51.8%;
-    --sidebar-background: 240 5.9% 10%;
-    --sidebar-foreground: 240 4.8% 95.9%;
-    --sidebar-primary: 224.3 76.3% 48%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 3.7% 15.9%;
-    --sidebar-accent-foreground: 240 4.8% 95.9%;
-    --sidebar-border: 240 3.7% 15.9%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    /* Theme custom properties */
+    --theme-primary: #00ffff;
+    --theme-secondary: #7000ff;
+    --theme-accent: #0aff9d;
+    --theme-glow: rgba(0, 255, 255, 0.5);
+    --theme-bg: #0a0a0f;
+    --theme-bg-alt: #1a0a2a;
+    --theme-card: rgba(20, 20, 30, 0.7);
+    --theme-card-border: rgba(0, 255, 255, 0.2);
+    --theme-text: #e0f0ff;
+    --theme-text-muted: #8899aa;
+    --theme-button-bg: rgba(0, 255, 255, 0.1);
+    --theme-button-border: rgba(0, 255, 255, 0.4);
+    --theme-button-text: #00ffff;
+    --theme-button-hover-bg: rgba(0, 255, 255, 0.25);
+    --theme-scrollbar: #00ffff;
+    --theme-scrollbar-track: #0a0a0f;
+    --theme-font: 'Orbitron', sans-serif;
   }
 }
 
@@ -100,122 +63,360 @@
     @apply border-border;
   }
 
+  html {
+    scroll-behavior: smooth;
+  }
+
   body {
     @apply bg-background text-foreground;
-    background: linear-gradient(135deg, #0a0a0f 0%, #1a0a2a 50%, #0f0f1a 100%);
+    background: var(--theme-bg);
     min-height: 100vh;
+    transition: background-color 2s ease, color 2s ease;
   }
 
-  .neon-glow {
-    box-shadow: 0 0 10px currentColor, 0 0 20px currentColor, 0 0 30px currentColor;
+  /* === Custom Scrollbar per theme === */
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
   }
 
-  .cosmic-particle {
-    animation: cosmic-float 3s ease-in-out infinite alternate;
+  ::-webkit-scrollbar-track {
+    background: var(--theme-scrollbar-track);
   }
 
-  @keyframes cosmic-float {
-    0% { transform: translateY(0px) rotate(0deg); }
-    100% { transform: translateY(-10px) rotate(5deg); }
+  ::-webkit-scrollbar-thumb {
+    background: var(--theme-scrollbar);
+    border-radius: 4px;
   }
 
-  .game-card-hover {
-    transition: all 0.3s ease;
-    transform-style: preserve-3d;
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--theme-primary);
   }
 
-  .game-card-hover:hover {
-    transform: rotateY(5deg) rotateX(5deg) translateZ(20px);
+  /* Firefox scrollbar */
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: var(--theme-scrollbar) var(--theme-scrollbar-track);
   }
 
-  /* Extreme CTA Animations */
-  @keyframes extreme-pulse {
-    0%, 100% {
-      opacity: 1;
-    }
-    50% {
-      opacity: 0.7;
-    }
+  /* === Theme transition === */
+  .theme-transition {
+    transition: all 2s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
-  @keyframes extreme-glow {
-    0%, 100% {
-      box-shadow: 0 0 30px rgba(255, 0, 212, 0.5), 0 0 60px rgba(112, 0, 255, 0.3);
-    }
-    50% {
-      box-shadow: 0 0 50px rgba(255, 0, 212, 0.8), 0 0 100px rgba(112, 0, 255, 0.6);
-    }
-  }
-
+  /* === Animations === */
   @keyframes shimmer {
     0% {
       transform: translateX(-100%);
     }
+
     100% {
       transform: translateX(100%);
     }
   }
 
+  @keyframes pulse-glow {
+
+    0%,
+    100% {
+      opacity: 0.5;
+    }
+
+    50% {
+      opacity: 1;
+    }
+  }
+
+  @keyframes float {
+
+    0%,
+    100% {
+      transform: translateY(0px);
+    }
+
+    50% {
+      transform: translateY(-8px);
+    }
+  }
+
   @keyframes glitch {
     0% {
-      text-shadow: -2px 0 #ff00d4, 2px 0 #00ffff, 0 2px #7000ff;
+      text-shadow: -2px 0 var(--theme-primary), 2px 0 var(--theme-secondary);
     }
+
     25% {
-      text-shadow: 2px 0 #ff00d4, -2px 0 #00ffff, 0 -2px #7000ff;
+      text-shadow: 2px 0 var(--theme-primary), -2px 0 var(--theme-secondary);
     }
+
     50% {
-      text-shadow: 0 2px #ff00d4, 0 -2px #00ffff, 2px 0 #7000ff;
+      text-shadow: 0 2px var(--theme-primary), 0 -2px var(--theme-secondary);
     }
+
     75% {
-      text-shadow: -2px 0 #ff00d4, 2px 0 #00ffff, -2px 2px #7000ff;
+      text-shadow: -2px 0 var(--theme-primary), 2px 0 var(--theme-secondary);
     }
+
     100% {
-      text-shadow: -2px 0 #ff00d4, 2px 0 #00ffff, 0 2px #7000ff;
+      text-shadow: -2px 0 var(--theme-primary), 2px 0 var(--theme-secondary);
     }
+  }
+
+  @keyframes extreme-glow {
+
+    0%,
+    100% {
+      box-shadow: 0 0 20px var(--theme-glow), 0 0 40px var(--theme-glow);
+    }
+
+    50% {
+      box-shadow: 0 0 40px var(--theme-glow), 0 0 80px var(--theme-glow);
+    }
+  }
+
+  @keyframes screen-glitch {
+
+    0%,
+    100% {
+      clip-path: inset(0 0 0 0);
+    }
+
+    10% {
+      clip-path: inset(10% 0 60% 0);
+    }
+
+    20% {
+      clip-path: inset(60% 0 10% 0);
+    }
+
+    30% {
+      clip-path: inset(30% 0 30% 0);
+    }
+
+    40% {
+      clip-path: inset(0 15% 0 0);
+    }
+
+    60% {
+      clip-path: inset(0 0 0 15%);
+    }
+  }
+
+  .neon-glow {
+    box-shadow: 0 0 10px var(--theme-glow), 0 0 20px var(--theme-glow);
   }
 
   .extreme-button-glow {
     animation: extreme-glow 3s ease-in-out infinite;
   }
 
-  .extreme-button-shimmer::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-    animation: shimmer 3s infinite;
-  }
-
-  .extreme-button-glitch {
-    animation: glitch 0.3s ease-in-out infinite;
-  }
-
-  /* Screen glitch effect on hover */
   .extreme-button-screen-glitch:hover {
     animation: screen-glitch 0.3s ease-in-out;
   }
 
-  @keyframes screen-glitch {
-    0%, 100% {
-      clip-path: inset(0 0 0 0);
+  /* === Card Shine Sweep === */
+  @keyframes card-shine {
+    0% {
+      transform: translateX(-100%) rotate(25deg);
     }
-    10% {
-      clip-path: inset(10% 0 60% 0);
+
+    100% {
+      transform: translateX(200%) rotate(25deg);
     }
-    20% {
-      clip-path: inset(60% 0 10% 0);
+  }
+
+  .card-shine-effect {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .card-shine-effect::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 50%;
+    height: 200%;
+    background: linear-gradient(90deg,
+        transparent,
+        rgba(255, 255, 255, 0.06),
+        rgba(255, 255, 255, 0.12),
+        rgba(255, 255, 255, 0.06),
+        transparent);
+    transform: rotate(25deg) translateX(-100%);
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  .card-shine-effect:hover::after {
+    animation: card-shine 0.8s ease-in-out forwards;
+  }
+
+  /* === Typewriter cursor blink === */
+  @keyframes blink-cursor {
+
+    0%,
+    100% {
+      opacity: 1;
     }
-    30% {
-      clip-path: inset(30% 0 30% 0);
+
+    50% {
+      opacity: 0;
     }
-    40% {
-      clip-path: inset(0 15% 0 0);
+  }
+
+  .typewriter-cursor::after {
+    content: '|';
+    animation: blink-cursor 0.8s steps(1) infinite;
+    color: var(--theme-primary);
+    font-weight: 100;
+    margin-left: 2px;
+  }
+
+  /* === Counter pop animation === */
+  @keyframes counter-pop {
+    0% {
+      transform: scale(1);
     }
-    60% {
-      clip-path: inset(0 0 0 15%);
+
+    50% {
+      transform: scale(1.25);
     }
+
+    100% {
+      transform: scale(1);
+    }
+  }
+
+  .counter-pop {
+    animation: counter-pop 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+
+  /* === Scroll-to-top pulse === */
+  @keyframes scroll-pulse {
+
+    0%,
+    100% {
+      box-shadow: 0 0 0 0 var(--theme-glow);
+    }
+
+    50% {
+      box-shadow: 0 0 0 8px transparent;
+    }
+  }
+
+  .scroll-top-btn {
+    animation: scroll-pulse 2s ease-in-out infinite;
+  }
+
+  /* === Random game dice spin === */
+  @keyframes dice-spin {
+    0% {
+      transform: rotate(0deg) scale(1);
+    }
+
+    25% {
+      transform: rotate(100deg) scale(1.2);
+    }
+
+    50% {
+      transform: rotate(180deg) scale(1);
+    }
+
+    75% {
+      transform: rotate(260deg) scale(1.15);
+    }
+
+    100% {
+      transform: rotate(360deg) scale(1);
+    }
+  }
+
+  .dice-spin {
+    animation: dice-spin 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+
+  /* === Marquee / News Ticker === */
+  @keyframes marquee {
+    0% {
+      transform: translateX(100%);
+    }
+
+    100% {
+      transform: translateX(-100%);
+    }
+  }
+
+  .marquee-text {
+    animation: marquee 20s linear infinite;
+    white-space: nowrap;
+  }
+
+  /* === Enhanced card border glow === */
+  @keyframes border-glow-pulse {
+
+    0%,
+    100% {
+      border-color: var(--theme-card-border);
+    }
+
+    50% {
+      border-color: var(--theme-primary);
+    }
+  }
+
+  /* === Floating badge bounce === */
+  @keyframes badge-bounce {
+
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+
+    50% {
+      transform: translateY(-4px);
+    }
+  }
+
+  .badge-bounce {
+    animation: badge-bounce 2s ease-in-out infinite;
+  }
+
+  /* === Grain overlay === */
+  .grain-overlay::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    opacity: 0.03;
+    z-index: 9999;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  /* === Selection color === */
+  ::selection {
+    background: var(--theme-primary);
+    color: var(--theme-bg);
+  }
+
+  /* === Focus styles === */
+  :focus-visible {
+    outline: 2px solid var(--theme-primary);
+    outline-offset: 2px;
+  }
+}
+
+/* === Reduced motion === */
+@media (prefers-reduced-motion: reduce) {
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
 }

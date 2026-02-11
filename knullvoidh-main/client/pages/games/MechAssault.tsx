@@ -19,7 +19,7 @@ interface Mech extends Position {
   health: number;
   armor: number;
   facing: number;
-  weaponType: 'cannon' | 'missiles' | 'laser';
+  weaponType: 'cannon' | 'missile' | 'laser';
   ammo: { cannon: number; missiles: number; laser: number };
   heat: number;
   speed: number;
@@ -31,7 +31,7 @@ interface EnemyMech extends Position {
   armor: number;
   facing: number;
   type: 'light' | 'medium' | 'heavy';
-  weaponType: 'cannon' | 'missiles' | 'laser';
+  weaponType: 'cannon' | 'missile' | 'laser';
   lastShot: number;
   ai: 'aggressive' | 'defensive' | 'patrol';
   targetX: number;
@@ -69,8 +69,8 @@ interface Explosion extends Position {
 
 const MechAssault: React.FC = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const gameLoopRef = useRef<createSafeAnimationManager | null>(null);
-  const keyHandlerRef = useRef<createSafeKeyManager | null>(null);
+  const gameLoopRef = useRef<ReturnType<typeof createSafeAnimationManager> | null>(null);
+  const keyHandlerRef = useRef<ReturnType<typeof createSafeKeyManager> | null>(null);
 
   const [gameState, setGameState] = useState<'menu' | 'playing' | 'gameOver' | 'missionComplete'>('menu');
   const [score, setScore] = useState(0);
@@ -155,7 +155,7 @@ const MechAssault: React.FC = () => {
       };
       
       const aiTypes: EnemyMech['ai'][] = ['aggressive', 'defensive', 'patrol'];
-      const weaponTypes: EnemyMech['weaponType'][] = ['cannon', 'missiles', 'laser'];
+      const weaponTypes: EnemyMech['weaponType'][] = ['cannon', 'missile', 'laser'];
       
       newEnemyMechs.push({
         x: 500 + Math.random() * 250,
@@ -277,7 +277,7 @@ const MechAssault: React.FC = () => {
           
           // Weapon switching
           if (keyHandler.isPressed('1')) newMech.weaponType = 'cannon';
-          if (keyHandler.isPressed('2')) newMech.weaponType = 'missiles';
+          if (keyHandler.isPressed('2')) newMech.weaponType = 'missile';
           if (keyHandler.isPressed('3')) newMech.weaponType = 'laser';
           
           // Firing
@@ -350,8 +350,8 @@ const MechAssault: React.FC = () => {
         if (distToPlayer < 300 && newEnemy.lastShot > (enemy.type === 'heavy' ? 120 : 80)) {
           newEnemy.lastShot = 0;
           
-          const shotSpeed = enemy.weaponType === 'laser' ? 10 : enemy.weaponType === 'missiles' ? 5 : 7;
-          const damage = enemy.weaponType === 'missiles' ? 50 : enemy.weaponType === 'cannon' ? 35 : 20;
+          const shotSpeed = enemy.weaponType === 'laser' ? 10 : enemy.weaponType === 'missile' ? 5 : 7;
+          const damage = enemy.weaponType === 'missile' ? 50 : enemy.weaponType === 'cannon' ? 35 : 20;
           
           setProjectiles(prev => [...prev, {
             x: enemy.x + Math.cos(enemy.facing) * 30,
@@ -362,7 +362,7 @@ const MechAssault: React.FC = () => {
             damage,
             isPlayerProjectile: false,
             life: 80,
-            size: enemy.weaponType === 'missiles' ? 10 : 6
+            size: enemy.weaponType === 'missile' ? 10 : 6
           }]);
         }
 
@@ -544,7 +544,7 @@ const MechAssault: React.FC = () => {
     // Weapon
     ctx.fillStyle = '#cccccc';
     const weaponLength = playerMech.weaponType === 'cannon' ? 35 : 
-                        playerMech.weaponType === 'missiles' ? 25 : 30;
+                        playerMech.weaponType === 'missile' ? 25 : 30;
     ctx.fillRect(playerMech.size/2, -3, weaponLength, 6);
     
     // Heat indicator

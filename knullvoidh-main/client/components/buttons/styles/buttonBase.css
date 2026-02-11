@@ -1,0 +1,192 @@
+/* ═══════════════════════════════════════════════════════════
+   KNULLVOID BUTTON BASE STYLES — AAA Gaming Quality
+   ═══════════════════════════════════════════════════════════ */
+
+/* ── Size Classes ── */
+.kv-btn-xs { padding: 4px 10px; font-size: 0.7rem; min-height: 26px; border-radius: 6px; }
+.kv-btn-sm { padding: 6px 14px; font-size: 0.8rem; min-height: 32px; border-radius: 8px; }
+.kv-btn-md { padding: 10px 22px; font-size: 0.9rem; min-height: 40px; border-radius: 10px; }
+.kv-btn-lg { padding: 14px 32px; font-size: 1rem; min-height: 48px; border-radius: 12px; }
+.kv-btn-xl { padding: 18px 42px; font-size: 1.15rem; min-height: 56px; border-radius: 14px; }
+
+/* ── Base Button ── */
+.kv-btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  border: 1.5px solid transparent;
+  backdrop-filter: blur(8px);
+  cursor: pointer;
+  user-select: none;
+  outline: none;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  overflow: hidden;
+  text-decoration: none;
+  white-space: nowrap;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.kv-btn:focus-visible {
+  outline: 2px solid var(--theme-primary);
+  outline-offset: 3px;
+}
+
+.kv-btn:disabled,
+.kv-btn[aria-disabled="true"] {
+  opacity: 0.45;
+  cursor: not-allowed;
+  filter: grayscale(0.6);
+  pointer-events: none;
+}
+
+/* ── Icon Button (Circle) ── */
+.kv-btn-icon-only {
+  border-radius: 50% !important;
+  aspect-ratio: 1;
+  padding: 0 !important;
+}
+.kv-btn-icon-only.kv-btn-xs { width: 28px; height: 28px; }
+.kv-btn-icon-only.kv-btn-sm { width: 34px; height: 34px; }
+.kv-btn-icon-only.kv-btn-md { width: 42px; height: 42px; }
+.kv-btn-icon-only.kv-btn-lg { width: 50px; height: 50px; }
+.kv-btn-icon-only.kv-btn-xl { width: 58px; height: 58px; }
+
+/* ── Scanline Overlay ── */
+.kv-btn-scanline::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(255,255,255,0.02) 2px,
+    rgba(255,255,255,0.02) 4px
+  );
+  pointer-events: none;
+  z-index: 3;
+  border-radius: inherit;
+}
+
+/* ── Loading Spinner ── */
+.kv-btn-spinner {
+  width: 16px;
+  height: 16px;
+  border: 2px solid transparent;
+  border-top-color: currentColor;
+  border-right-color: currentColor;
+  border-radius: 50%;
+  animation: kv-spin 0.7s linear infinite;
+}
+
+@keyframes kv-spin {
+  to { transform: rotate(360deg); }
+}
+
+/* ── Success Checkmark ── */
+@keyframes kv-check-draw {
+  0% { stroke-dashoffset: 24; }
+  100% { stroke-dashoffset: 0; }
+}
+
+/* ── Shimmer Sweep ── */
+@keyframes kv-shimmer {
+  0% { transform: translateX(-100%) skewX(-15deg); }
+  100% { transform: translateX(200%) skewX(-15deg); }
+}
+
+.kv-btn-shimmer::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    105deg,
+    transparent 40%,
+    rgba(255,255,255,0.06) 45%,
+    rgba(255,255,255,0.12) 50%,
+    rgba(255,255,255,0.06) 55%,
+    transparent 60%
+  );
+  pointer-events: none;
+  z-index: 4;
+  transform: translateX(-100%) skewX(-15deg);
+  border-radius: inherit;
+}
+
+.kv-btn:hover .kv-btn-shimmer::after,
+.kv-btn-shimmer:hover::after {
+  animation: kv-shimmer 1.2s ease-in-out;
+}
+
+/* ── Border Pulse ── */
+@keyframes kv-border-pulse {
+  0%, 100% { border-color: var(--kv-btn-border); }
+  50% { border-color: var(--kv-btn-border-hover); }
+}
+
+.kv-btn:hover {
+  animation: kv-border-pulse 2s ease-in-out infinite;
+}
+
+/* ── Glow Pulse (loading state) ── */
+@keyframes kv-glow-breathe {
+  0%, 100% { box-shadow: 0 0 8px var(--kv-btn-glow), 0 0 20px var(--kv-btn-glow); }
+  50% { box-shadow: 0 0 16px var(--kv-btn-glow), 0 0 40px var(--kv-btn-glow); }
+}
+
+.kv-btn-loading {
+  animation: kv-glow-breathe 1.5s ease-in-out infinite;
+}
+
+/* ── Text Glitch on hover ── */
+@keyframes kv-text-glitch {
+  0%, 100% { text-shadow: none; }
+  10% { text-shadow: -1px 0 var(--theme-primary), 1px 0 var(--theme-secondary); }
+  20% { text-shadow: 1px 0 var(--theme-primary), -1px 0 var(--theme-secondary); }
+  30% { text-shadow: none; }
+}
+
+.kv-btn:hover .kv-btn-text {
+  animation: kv-text-glitch 0.3s ease-in-out;
+}
+
+/* ── Destructive Shake ── */
+@keyframes kv-shake {
+  0%, 100% { transform: translateX(0); }
+  10%, 30%, 50%, 70%, 90% { transform: translateX(-2px); }
+  20%, 40%, 60%, 80% { transform: translateX(2px); }
+}
+
+.kv-btn-destructive:hover {
+  animation: kv-shake 0.4s ease-in-out;
+}
+
+/* ── Shortcut Hint ── */
+.kv-btn-shortcut {
+  font-size: 0.6em;
+  opacity: 0.5;
+  margin-left: 6px;
+  padding: 1px 4px;
+  border: 1px solid currentColor;
+  border-radius: 3px;
+  font-family: monospace;
+  line-height: 1.2;
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+/* ── Reduced Motion ── */
+@media (prefers-reduced-motion: reduce) {
+  .kv-btn,
+  .kv-btn::after,
+  .kv-btn::before,
+  .kv-btn-spinner {
+    animation: none !important;
+    transition: none !important;
+  }
+}
