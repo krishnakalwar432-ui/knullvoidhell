@@ -1,11 +1,11 @@
 {
+    "version": 2,
     "buildCommand": "npm run build:client",
     "outputDirectory": "dist/spa",
-    "installCommand": "npm install",
     "framework": "vite",
     "rewrites": [
         {
-            "source": "/((?!api/).*)",
+            "source": "/(.*)",
             "destination": "/index.html"
         }
     ],
